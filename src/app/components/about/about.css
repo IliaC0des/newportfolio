@@ -5,6 +5,11 @@
 
 .about {
   position: relative;
+  /* Skill tooltips are centred on their tag, so the ones near the right edge used to
+     stick out past the viewport and widen the page. Clip on x only - `overflow-y`
+     stays visible so the sticky column keeps working. */
+  overflow-x: clip;
+  overflow-y: visible;
   padding-block: var(--section-y);
   background: linear-gradient(180deg, #050505 0%, #08070d 45%, #050505 100%);
 }
@@ -239,6 +244,8 @@
   bottom: calc(100% + 10px);
   left: 50%;
   transform: translate(-50%, 6px);
+  width: max-content;
+  max-width: min(15rem, calc(100vw - 2 * var(--gutter)));
   padding: 0.45rem 0.7rem;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -247,7 +254,8 @@
   font-family: var(--font-mono);
   font-size: 0.6rem;
   letter-spacing: 0.08em;
-  white-space: nowrap;
+  white-space: normal;
+  text-align: center;
   color: var(--fg-dim);
   opacity: 0;
   pointer-events: none;

@@ -55,6 +55,11 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: auto;
+  /* `clip` (not `hidden`) kills horizontal scroll without turning the root into a
+     scroll container - keeps `position: sticky` working and is honoured on iOS,
+     where `overflow-x: hidden` is routinely ignored. */
+  overflow-x: clip;
+  overflow-y: visible;
 }
 html,
 body {
@@ -73,8 +78,11 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
+  overflow-y: visible;
+  max-width: 100%;
   overscroll-behavior-y: none;
+  overscroll-behavior-x: none;
 }
 canvas {
   display: block;
