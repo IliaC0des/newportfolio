@@ -195,8 +195,10 @@ export class Hero {
   }
 
   private scheduleHeavyFx(): void {
-    if (this.motion.isTouch() || this.motion.reducedMotion()) return;
-    if (window.innerWidth < 900 || window.matchMedia('(pointer: coarse)').matches) return;
+    // Touch devices get the same gridscan as desktop - the only opt-outs left are the
+    // ones desktop honours too: an explicit reduced-motion preference and genuinely
+    // low-end hardware / metered connections.
+    if (this.motion.reducedMotion()) return;
 
     const nav = navigator as Navigator & {
       deviceMemory?: number;
@@ -209,12 +211,24 @@ export class Hero {
     if ((nav.deviceMemory ?? 8) < 4) return;
     if ((nav.hardwareConcurrency ?? 8) < 4) return;
 
-    const events = ['pointermove', 'pointerdown', 'wheel', 'keydown', 'scroll'] as const;
+    const events = [
+      'pointermove',
+      'pointerdown',
+      'touchstart',
+      'wheel',
+      'keydown',
+      'scroll',
+    ] as const;
     const idle = window.requestIdleCallback as typeof window.requestIdleCallback | undefined;
     let handle: number | undefined;
+    let fallback: number | undefined;
 
     const detach = () => {
       for (const event of events) window.removeEventListener(event, onIntent);
+      if (fallback !== undefined) {
+        window.clearTimeout(fallback);
+        fallback = undefined;
+      }
     };
 
     const onIntent = () => {
@@ -227,6 +241,11 @@ export class Hero {
     for (const event of events) {
       window.addEventListener(event, onIntent, { once: true, passive: true });
     }
+
+    // A phone can sit untouched on the hero for a long time - a pointer never moves the
+    // way it does on desktop. Mount it anyway shortly after first paint so the grid is
+    // alive without waiting for a tap.
+    fallback = window.setTimeout(onIntent, 1200);
 
     this.destroyRef.onDestroy(() => {
       detach();
