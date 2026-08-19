@@ -1,0 +1,115 @@
+<section id="hero" class="hero" data-anim="pending">
+  <div class="hero__bg" aria-hidden="true">
+    @defer (when heavyFx()) {
+      <om-gridscan
+        [enablePointer]="true"
+        [enableGyro]="true"
+        [scanOnClick]="true"
+        [sensitivity]="0.5"
+        [gridScale]="gridScale()"
+        [lineThickness]="1"
+        [lineStyle]="'solid'"
+        [lineJitter]="jitter()"
+        linesColor="#2b2440"
+        scanColor="#8f6bff"
+        [scanOpacity]="scanOpacity()"
+        [scanDirection]="'pingpong'"
+        [scanDuration]="2.6"
+        [scanDelay]="2.2"
+        [scanGlow]="0.6"
+        [scanSoftness]="2.2"
+        [enablePost]="true"
+        [bloomIntensity]="0.55"
+        [bloomThreshold]="0.22"
+        [bloomSmoothing]="0.4"
+        [chromaticAberration]="aberration()"
+        [noiseIntensity]="0.02"
+        [style]="{ width: '100%', height: '100%' }"
+      ></om-gridscan>
+    } @placeholder {
+      <div class="hero__bg-fallback"></div>
+    }
+  </div>
+
+  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="hero__grain" aria-hidden="true"></div>
+  <div class="hero__scrim" aria-hidden="true"></div>
+
+  <div class="hero__inner shell">
+    <div class="hero__copy">
+
+
+      <h1 class="hero__title">
+        @for (line of lines; track $index) {
+          <span class="line-mask">
+            <span class="line-inner">
+              @for (word of line; track $index) {
+                <span class="word" [class.is-accent]="word.accent">{{ word.text }}</span>&ngsp;
+              }
+            </span>
+          </span>
+        }
+      </h1>
+      <div class="hero__lower">
+        <p class="hero__tagline">{{ profile.tagline }}</p>
+        <div class="hero__cta">
+          <a
+            class="btn btn--primary"
+            href="#work"
+            appMagnetic
+            [strength]="0.35"
+            data-cursor="View"
+            (click)="$event.preventDefault(); scrollTo('work')"
+          >
+            Selected work
+            <span class="btn__arrow" aria-hidden="true">↗</span>
+          </a>
+          <a
+            class="btn"
+            href="#contact"
+            appMagnetic
+            [strength]="0.35"
+            (click)="$event.preventDefault(); scrollTo('contact')"
+          >
+            Start a project
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero__foot shell">
+    <button class="cue" type="button" data-cursor="Scroll" (click)="scrollTo('about')">
+      <span class="cue__rail"><span class="cue__dot"></span></span>
+      <span class="cue__label">Scroll</span>
+    </button>
+    <ul class="hero__stats">
+      @for (stat of profile.stats; track stat.label) {
+        <li class="stat">
+          <span class="stat__value">{{ stat.value }}</span>
+          <span class="stat__label">{{ stat.label }}</span>
+        </li>
+      }
+    </ul>
+  </div>
+  <nav class="marquee" aria-label="Social links">
+    <ul class="marquee__track">
+      @for (social of marqueeSocials; track $index) {
+        <li class="marquee__cell" [attr.aria-hidden]="$index >= socialCount ? 'true' : null">
+          <a
+            class="marquee__item"
+            [href]="social.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            [attr.tabindex]="$index >= socialCount ? -1 : null"
+            data-cursor="Open"
+          >
+            <svg class="marquee__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path [attr.d]="social.path" />
+            </svg>
+            <span class="marquee__label">{{ social.label }}</span>
+          </a>
+        </li>
+      }
+    </ul>
+  </nav>
+</section>

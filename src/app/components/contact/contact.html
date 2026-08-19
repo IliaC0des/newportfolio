@@ -1,0 +1,139 @@
+<section id="contact" class="contact">
+  <div class="contact__grid shell">
+    <div class="contact__head">
+      <p class="eyebrow">{{ copy.eyebrow }}</p>
+
+      <h2 class="contact__title">
+        @for (line of copy.headline; track $index) {
+          <span class="line-mask"><span class="line-inner">{{ line }}</span></span>
+        }
+      </h2>
+
+      <p class="contact__blurb" appReveal>{{ copy.blurb }}</p>
+
+      <a class="mail" [href]="'mailto:' + profile.email" data-cursor="Write" appMagnetic [strength]="0.18">
+        <span class="mail__label">Direct</span>
+        <span class="mail__value">{{ profile.email }}</span>
+      </a>
+
+      <ul class="socials" appReveal [stagger]="0.06">
+        @for (social of socials; track social.label) {
+          <li data-reveal-item>
+            <a
+              class="social"
+              [href]="social.url"
+              target="_blank"
+              rel="noreferrer noopener"
+              appMagnetic
+              [strength]="0.4"
+              innerSelector=".social__inner"
+              [innerFactor]="0.4"
+              [attr.data-cursor]="social.label"
+            >
+              <span class="social__inner">
+                <span class="social__label">{{ social.label }}</span>
+              </span>
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <div class="contact__form">
+      @if (state() === 'sent') {
+        <div class="sent">
+          <span class="sent__mark" aria-hidden="true">✓</span>
+          <h3 class="sent__title">Message received.</h3>
+          <p class="sent__text">
+            Thanks — {{ copy.responseTime.toLowerCase() }}. In the meantime, the
+            work section has more detail on how I build.
+          </p>
+          <button class="btn" type="button" (click)="reset()">Send another</button>
+        </div>
+      } @else {
+        <form class="form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+          <div class="field" [class.has-error]="showError('name')">
+            <label for="name">Name</label>
+            <input id="name" type="text" formControlName="name" placeholder="Ada Lovelace" autocomplete="name" />
+            @if (showError('name')) {
+              <p class="field__error">Tell me who you are (2 characters minimum).</p>
+            }
+          </div>
+
+          <div class="field" [class.has-error]="showError('email')">
+            <label for="email">Email</label>
+            <input id="email" type="email" formControlName="email" placeholder="you@studio.com" autocomplete="email" />
+            @if (showError('email')) {
+              <p class="field__error">That address doesn’t look right.</p>
+            }
+          </div>
+
+          <div class="field">
+            <label for="budget">Budget</label>
+            <div class="select">
+              <select id="budget" formControlName="budget">
+                @for (option of copy.budgets; track option) {
+                  <option [value]="option">{{ option }}</option>
+                }
+              </select>
+              <span class="select__chevron" aria-hidden="true">▾</span>
+            </div>
+          </div>
+
+          <div class="field field--wide" [class.has-error]="showError('message')">
+            <label for="message">
+              Project
+              <span class="field__count">{{ messageLength() }} / 20 min</span>
+            </label>
+            <textarea
+              id="message"
+              rows="5"
+              formControlName="message"
+              placeholder="What are you building, who is it for, and when does it need to exist?"
+            ></textarea>
+            @if (showError('message')) {
+              <p class="field__error">A couple of sentences is plenty — 20 characters minimum.</p>
+            }
+          </div>
+
+          <div class="form__foot">
+            <p class="form__note">{{ copy.responseTime }}</p>
+            <button class="btn btn--primary submit" type="submit" [disabled]="sending()" data-cursor="Send">
+              @if (sending()) {
+                <span class="submit__spinner" aria-hidden="true"></span>
+                Sending
+              } @else {
+                Send message
+                <span aria-hidden="true">↗</span>
+              }
+            </button>
+          </div>
+
+          @if (state() === 'error') {
+            <p class="form__error" role="alert">Something went wrong. Try again, or email me directly.</p>
+          }
+        </form>
+      }
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__bar shell">
+      <span class="footer__item">
+        <i class="footer__dot"></i>
+        {{ profile.location }} — {{ localTime() || '· ·' }} local
+      </span>
+      <span class="footer__item">Built with Angular, Three.js &amp; GSAP</span>
+      <button class="footer__top" type="button" (click)="scrollTo('hero')" data-cursor="Top">
+        Back to top ↑
+      </button>
+    </div>
+
+    <div class="footer__mark shell" aria-hidden="true">{{ profile.name }}</div>
+
+    <div class="footer__legal shell">
+      <span>© {{ year }} {{ profile.name }}</span>
+      <span>All rights reserved</span>
+    </div>
+  </footer>
+</section>

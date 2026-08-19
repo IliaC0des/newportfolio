@@ -1,0 +1,46 @@
+# Ilia Iliadi — Full-Stack & Web Engineer
+
+> Ilia Iliadi is a full-stack web developer based in Tbilisi, Georgia. He builds fast,
+> responsive web applications and interactive motion interfaces with Angular, TypeScript,
+> C#/ASP.NET Web API and GSAP. Available for freelance and remote work.
+
+## Identity
+- Name: Ilia Iliadi
+- Role: Full-Stack Web Developer / Front-End Engineer
+- Location: Tbilisi, Georgia (Asia/Tbilisi)
+- Availability: Open for remote work and freelance engagements
+- Website: https://iliadi.dev
+- Email: iliailiadi9@gmail.com
+- CV / resume: https://iliadi.dev/assets/CV.pdf
+
+## Technical Stack
+- Frontend: Angular (standalone components, signals, SSR), TypeScript, HTML5, CSS3/SCSS, RxJS, Tailwind CSS
+- Graphics & motion: GSAP (ScrollTrigger, timelines), Lenis, WebGL, Canvas 2D
+- Backend & tooling: C#, ASP.NET Web API, Node.js, Python, SQL, Git, Netlify
+- Practices: responsive design, web performance, accessibility, algorithmic problem solving
+
+## Experience
+- 2024 — Present: Freelance Web Developer (self-employed). Custom web applications for local
+  businesses and individual clients, focused on responsive design, scroll motion and performance.
+- 2023 — Present: Competitive programmer. Hackathon and computer-science olympiad competitor,
+  with 1st place finishes in team programming challenges.
+- 2022 — Present: Software development student at IT STEP Academy Georgia — a three-year
+  full-stack program covering computer science, databases, modern web frameworks and OOP.
+
+## Projects
+- Pulp Tbilisi (2026) — https://pulptbilisi.netlify.app/
+  Web application for Pulp, a specialty coffee house and wine bar in Vera, Tbilisi.
+  Modern responsive UI, custom menu layouts, smooth navigation.
+  Built with Angular, TypeScript, REST API, GSAP, database design.
+
+## Links
+- Website: https://iliadi.dev
+- GitHub: https://github.com/IliaC0des
+- LinkedIn: https://www.linkedin.com/in/iliailiadi/
+- Instagram: https://www.instagram.com/ilarionaaa7/
+- YouTube: https://www.youtube.com/@ilushayoutubze
+- Facebook: https://www.facebook.com/profile.php?id=61584621844348
+
+## Contact
+Reach out by email at iliailiadi9@gmail.com or through the contact form at https://iliadi.dev/#contact.
+Typical reply time is under 24 hours.

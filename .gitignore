@@ -5,11 +5,58 @@
 /tmp
 /out-tsc
 /bazel-out
+*.tsbuildinfo
 
 # Node
 /node_modules
-npm-debug.log
-yarn-error.log
+npm-debug.log*
+yarn-error.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-store/
+
+# Angular / build caches
+/.angular/cache
+.eslintcache
+.stylelintcache
+.parcel-cache
+.cache/
+
+# Environment & secrets — never commit these to a public repo
+.env
+.env.*
+!.env.example
+*.local
+secrets.json
+credentials.json
+service-account*.json
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+*.jks
+
+# Deploy tooling
+.netlify/
+.vercel/
+.firebase/
+.wrangler/
+.serverless/
+
+# Tests & reports
+/coverage
+/.nyc_output
+testem.log
+/libpeerconnection.log
+__screenshots__/
+/playwright-report
+/test-results
+/blob-report
+lighthouse-report*
+*.lighthouseci
+.lighthouseci/
 
 # IDEs and editors
 .idea/
@@ -19,6 +66,11 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
+*.sublime-project
+.history/*
+*.swp
+*.swo
+*~
 
 # Visual Studio Code
 .vscode/*
@@ -27,18 +79,26 @@ yarn-error.log
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/mcp.json
-.history/*
 
-# Miscellaneous
-/.angular/cache
-.sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
-__screenshots__/
+# Claude Code — share project config, keep machine-local settings out
+.claude/settings.local.json
+.claude/*.local.json
 
 # System files
 .DS_Store
+.AppleDouble
+.LSOverride
+._*
 Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Misc
+/connect.lock
+/typings
+.sass-cache/
+*.log

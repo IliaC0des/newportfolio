@@ -1,0 +1,73 @@
+:host {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  display: block;
+  mix-blend-mode: difference;
+}
+
+.dot,
+.ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  transition: opacity 0.3s ease, transform 0.3s var(--ease-out);
+}
+
+.dot.is-active {
+  opacity: 0.35 !important;
+}
+
+.ring {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  display: grid;
+  place-items: center;
+  transition: width 0.45s var(--ease-out), height 0.45s var(--ease-out),
+    border-color 0.45s var(--ease-out), background-color 0.45s var(--ease-out);
+}
+
+.ring.is-active {
+  width: 62px;
+  height: 62px;
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+.ring.is-labelled {
+  width: 92px;
+  height: 92px;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: transparent;
+}
+
+.ring__label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+  white-space: nowrap;
+}
+
+.ring.is-labelled .ring__label {
+  opacity: 1;
+  transform: scale(1);
+}
+
+:host-context(html.is-touch),
+:host-context(html.no-motion) {
+  display: none;
+}

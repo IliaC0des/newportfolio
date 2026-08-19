@@ -1,0 +1,66 @@
+<div class="progress" aria-hidden="true">
+  <span class="progress__fill"></span>
+</div>
+
+<header class="bar" [class.is-scrolled]="scrolled()" [class.is-hidden]="hidden()">
+  <a class="brand" href="#hero" (click)="go($event, 'hero')" data-cursor="Top">
+    <img
+      class="brand__mark"
+      [src]="profile.logo.src"
+      [srcset]="profile.logo.srcset"
+      sizes="36px"
+      width="36"
+      height="36"
+      [alt]="profile.logo.alt"
+      decoding="async"
+    />
+    <span class="brand__meta">
+      <span class="brand__name">{{ profile.name }}</span>
+      <span class="brand__role">{{ profile.role }}</span>
+    </span>
+  </a>
+
+  <nav class="links" [class.is-open]="menuOpen()" aria-label="Sections">
+    @for (link of links; track link.target) {
+      <a
+        class="link"
+        [class.is-active]="active() === link.target"
+        [href]="'#' + link.target"
+        (click)="go($event, link.target)"
+        appMagnetic
+        [strength]="0.22"
+      >
+        <span class="link__text">{{ link.label }}</span>
+      </a>
+    }
+  </nav>
+
+  <div class="tail">
+    <a
+      class="cv"
+      [href]="profile.cv.url"
+      [attr.download]="profile.cv.filename"
+      [title]="profile.cv.label"
+      data-cursor="Download"
+      appMagnetic
+      [strength]="0.25"
+    >
+      <svg class="cv__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M11 3h2v9.2l3.6-3.6 1.4 1.4-6 6-6-6 1.4-1.4 3.6 3.6V3Z" />
+        <path d="M4 18h16v2H4z" />
+      </svg>
+      <span class="cv__text">{{ profile.cv.label }}</span>
+    </a>
+
+    <button
+      class="burger"
+      type="button"
+      [attr.aria-expanded]="menuOpen()"
+      aria-label="Toggle navigation"
+      (click)="toggleMenu()"
+    >
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>

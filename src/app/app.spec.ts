@@ -1,23 +1,27 @@
-import { TestBed } from '@angular/core/testing';
+import { DeferBlockBehavior, TestBed } from '@angular/core/testing';
 import { App } from './app';
+import { HERO_PROFILE } from './components/hero/hero';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
+      deferBlockBehavior: DeferBlockBehavior.Manual,
     }).compileComponents();
   });
 
-  it('should create the app', () => {
+  it('creates the shell', () => {
     const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  it('renders the smooth-scroll wrapper and the hero headline', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, portfolio');
+    const el = fixture.nativeElement as HTMLElement;
+
+    expect(el.querySelector('#smooth-wrapper')).toBeTruthy();
+    expect(el.querySelector('#smooth-content')).toBeTruthy();
+    expect(el.querySelector('h1')?.textContent).toContain(HERO_PROFILE.headline[0]);
   });
 });

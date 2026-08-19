@@ -1,0 +1,32 @@
+{
+  "name": "Ilia Iliadi — Full-Stack & Web Engineer",
+  "short_name": "Ilia Iliadi",
+  "description": "Portfolio of Ilia Iliadi, a Full-Stack Web Developer building responsive web applications, interactive motion, and custom tools with Angular, TypeScript, C# and GSAP.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#050505",
+  "lang": "en",
+  "categories": ["portfolio", "developer", "business"],
+  "icons": [
+    {
+      "src": "/assets/favicon/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/favicon/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/favicon/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

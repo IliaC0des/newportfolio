@@ -1,0 +1,32 @@
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+#smooth-wrapper {
+  display: block;
+  width: 100%;
+}
+
+#smooth-content {
+  display: block;
+  width: 100%;
+  will-change: transform;
+}
+
+main {
+  display: block;
+  width: 100%;
+}
+
+.slab {
+  display: block;
+  width: 100%;
+  min-height: 90vh;
+  background: linear-gradient(180deg, #050505, #08070c, #050505);
+}
+.slab--tall {
+  min-height: 140vh;
+}

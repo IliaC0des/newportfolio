@@ -1,0 +1,105 @@
+<section id="about" class="about">
+  <div class="about__grid shell">
+    <div class="about__head">
+      <div class="about__head-inner">
+        <h2 class="eyebrow" style="padding: 5px;">{{ copy.eyebrow }}</h2>
+
+
+
+        <div class="about__aside">
+          <figure class="portrait">
+            <div class="portrait__frame">
+              <img
+                src="/assets/images/portrait-600.webp"
+                srcset="/assets/images/portrait-300.webp 300w, /assets/images/portrait-600.webp 600w"
+                sizes="(max-width: 560px) 62vw, (max-width: 900px) 34vw, 300px"
+                width="600"
+                height="815"
+                alt="Ilia Iliadi, full-stack web developer, portrait"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="portrait__tint" aria-hidden="true"></span>
+              <span class="portrait__grain" aria-hidden="true"></span>
+            </div>
+            <figcaption class="portrait__caption">
+              <span class="portrait__rule" aria-hidden="true"></span>
+              {{ profile.location }}
+            </figcaption>
+          </figure>
+
+          <ul class="meta" appReveal [stagger]="0.07" [delay]="0.15">
+            <li data-reveal-item>
+              <span class="meta__key">Based in</span>
+              <span class="meta__val">{{ profile.location }}</span>
+            </li>
+            <li data-reveal-item>
+              <span class="meta__key">Focus</span>
+              <span class="meta__val">Web apps &amp; interactive motion</span>
+            </li>
+            <li data-reveal-item>
+              <span class="meta__key">Status</span>
+              <span class="meta__val meta__val--accent">{{ profile.availability }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="about__body">
+      @for (paragraph of profile.about; track $index) {
+        <p>{{ paragraph }}</p>
+      }
+    </div>
+  </div>
+
+  <div class="skills shell">
+    <div class="skills__head">
+      <p class="eyebrow">Toolkit</p>
+      <p class="skills__hint">Hover a tag for context</p>
+    </div>
+    <div class="skills__grid">
+      @for (group of groups; track group.title) {
+        <div class="group" appReveal [stagger]="0.05">
+          <h3 class="group__title" data-reveal-item>{{ group.title }}</h3>
+          <ul class="tags">
+            @for (skill of group.skills; track skill.name) {
+              <li class="tag" [attr.data-level]="skill.level" data-reveal-item tabindex="0">
+                <span class="tag__dots" aria-hidden="true">
+                  <i></i><i></i><i></i>
+                </span>
+                <span class="tag__name">{{ skill.name }}</span>
+                <span class="tag__note" role="tooltip">{{ skill.note }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="experience shell">
+    <p class="eyebrow">Trajectory</p>
+    <ol class="rail">
+      <span class="rail__line" aria-hidden="true">
+        <span class="rail__progress"></span>
+      </span>
+      @for (entry of timeline; track entry.company) {
+        <li class="entry" appReveal [y]="44">
+          <div class="entry__marker" aria-hidden="true"></div>
+          <p class="entry__period">{{ entry.period }}</p>
+          <div class="entry__main">
+            <h3 class="entry__role">{{ entry.role }}</h3>
+            <p class="entry__company">{{ entry.company }}</p>
+            <p class="entry__summary">{{ entry.summary }}</p>
+            <ul class="chips">
+              @for (item of entry.stack; track item) {
+                <li class="chip">{{ item }}</li>
+              }
+            </ul>
+          </div>
+        </li>
+      }
+    </ol>
+  </div>
+</section>

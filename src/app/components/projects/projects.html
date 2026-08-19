@@ -1,0 +1,93 @@
+<section id="work" class="work">
+  <svg class="distort-defs" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="poster-distort" x="-12%" y="-12%" width="124%" height="124%">
+        <feTurbulence
+          class="distort-turbulence"
+          type="fractalNoise"
+          baseFrequency="0.004"
+          numOctaves="2"
+          result="noise"
+        />
+        <feDisplacementMap
+          class="distort-displacement"
+          in="SourceGraphic"
+          in2="noise"
+          scale="0"
+          xChannelSelector="R"
+          yChannelSelector="G"
+        />
+      </filter>
+    </defs>
+  </svg>
+
+  <div class="work__intro shell">
+    <div>
+      <p class="eyebrow">{{ copy.eyebrow }}</p>
+      <h2 class="section-title work__title">
+        @for (line of copy.title; track $index) {
+          <span class="line-mask"><span class="line-inner">{{ line }}</span></span>
+        }
+      </h2>
+    </div>
+
+    <p class="work__note">
+      A selection of recent builds. Each one shipped to production, and each one
+      taught me something about the gap between a design file and a frame budget.
+    </p>
+  </div>
+
+  <div class="gallery shell">
+    <div class="track">
+      @for (project of projects; track project.id) {
+        <article class="card" appReveal [y]="48">
+          <a class="card__link" [href]="project.url" data-cursor="Open case">
+            <div class="card__frame">
+              <div class="card__poster">
+                <img
+                  [src]="project.poster"
+                  [alt]="project.title + ' — ' + project.subtitle"
+                  width="680"
+                  height="382"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="card__scan"></span>
+              </div>
+              <span class="card__index">{{ project.index }}</span>
+              <span class="card__year">{{ project.year }}</span>
+            </div>
+
+            <div class="card__body">
+              <h3 class="card__title">{{ project.title }}</h3>
+              <p class="card__subtitle">{{ project.subtitle }}</p>
+              <p class="card__desc">{{ project.description }}</p>
+
+              <div class="card__foot">
+                <ul class="card__stack">
+                  @for (tech of project.stack; track tech) {
+                    <li>{{ tech }}</li>
+                  }
+                </ul>
+                <span class="card__role">{{ project.role }}</span>
+              </div>
+            </div>
+          </a>
+        </article>
+      }
+
+      <article class="card card--end" appReveal [y]="48" [delay]="0.08">
+        <div class="end">
+          <h3 class="end__title">Your project<br />is next.</h3>
+          <p class="end__text">
+            Two collaboration slots left this quarter. Bring a hard interface
+            problem.
+          </p>
+          <a class="btn btn--primary" href="#contact" (click)="goToContact($event)">
+            Start a conversation
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
