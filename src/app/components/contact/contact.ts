@@ -13,6 +13,11 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MotionService } from '../../core/motion.service';
 import { MagneticDirective } from '../../core/magnetic.directive';
 import { RevealDirective } from '../../core/reveal.directive';
+import {
+  EMAILJS_CONFIG,
+  EMAILJS_ENDPOINT,
+  EMAILJS_TIMEOUT_MS,
+} from '../../core/emailjs.config';
 
 type SendState = 'idle' | 'sending' | 'sent' | 'error';
 
@@ -132,7 +137,10 @@ export class Contact {
     try {
       await this.deliver();
       this.state.set('sent');
-    } catch {
+    } catch (error) {
+      // The visible message stays generic; the reason goes to the console so a failing
+      // template id or origin restriction is diagnosable without guessing.
+      console.error('[contact] EmailJS delivery failed', error);
       this.state.set('error');
     }
   }
@@ -148,8 +156,48 @@ export class Contact {
     this.motion.scrollTo(target);
   }
 
-  private deliver(): Promise<void> {
-    return new Promise((resolve) => setTimeout(resolve, 1400));
+  private async deliver(): Promise<void> {
+    const { serviceId, templateId, publicKey } = EMAILJS_CONFIG;
+
+    if (!serviceId || !templateId || !publicKey) {
+      throw new Error(
+        'EmailJS is not configured - fill in serviceId, templateId and publicKey in src/app/core/emailjs.config.ts',
+      );
+    }
+
+    const { name, email, budget, message } = this.form.getRawValue();
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), EMAILJS_TIMEOUT_MS);
+
+    try {
+      const response = await fetch(EMAILJS_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
+        body: JSON.stringify({
+          service_id: serviceId,
+          template_id: templateId,
+          user_id: publicKey,
+          template_params: {
+            name,
+            email,
+            budget,
+            message,
+            from_name: name,
+            reply_to: email,
+            to_name: this.profile.name,
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        // EmailJS returns the reason as plain text, e.g. "The user_id parameter is required".
+        throw new Error(`EmailJS returned ${response.status}: ${await response.text()}`);
+      }
+    } finally {
+      clearTimeout(timeout);
+    }
   }
 
   private shake(): void {
