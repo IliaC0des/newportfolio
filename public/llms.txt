@@ -4,22 +4,29 @@
 > responsive web applications and interactive motion interfaces with Angular, TypeScript,
 > C#/ASP.NET Web API and GSAP. Available for freelance and remote work.
 
-## Identity
-- Name: Ilia Iliadi
-- Role: Full-Stack Web Developer / Front-End Engineer
-- Location: Tbilisi, Georgia (Asia/Tbilisi)
-- Availability: Open for remote work and freelance engagements
-- Website: https://iliadi.dev
-- Email: iliailiadi9@gmail.com
-- CV / resume: https://iliadi.dev/assets/CV.pdf
+Full-stack developer working primarily in Angular and TypeScript, with a focus on
+scroll-driven motion, WebGL interfaces and web performance. Studying at IT STEP Academy
+Georgia and competing in programming olympiads and hackathons.
 
-## Technical Stack
+## Identity
+
+- [Portfolio — iliadi.dev](https://iliadi.dev): Personal site, selected work and contact.
+- [Email](mailto:iliailiadi9@gmail.com): Direct contact, typical reply under 24 hours.
+- [CV / resume (PDF)](https://iliadi.dev/assets/CV.pdf): Full curriculum vitae.
+
+Role: Full-Stack Web Developer / Front-End Engineer.
+Location: Tbilisi, Georgia (Asia/Tbilisi).
+Availability: Open for remote work and freelance engagements.
+
+## Technical stack
+
 - Frontend: Angular (standalone components, signals, SSR), TypeScript, HTML5, CSS3/SCSS, RxJS, Tailwind CSS
-- Graphics & motion: GSAP (ScrollTrigger, timelines), Lenis, WebGL, Canvas 2D
-- Backend & tooling: C#, ASP.NET Web API, Node.js, Python, SQL, Git, Netlify
+- Graphics and motion: GSAP (ScrollTrigger, timelines), Lenis, WebGL, Canvas 2D
+- Backend and tooling: C#, ASP.NET Web API, Node.js, Python, SQL, Git, Netlify
 - Practices: responsive design, web performance, accessibility, algorithmic problem solving
 
 ## Experience
+
 - 2024 — Present: Freelance Web Developer (self-employed). Custom web applications for local
   businesses and individual clients, focused on responsive design, scroll motion and performance.
 - 2023 — Present: Competitive programmer. Hackathon and computer-science olympiad competitor,
@@ -28,19 +35,24 @@
   full-stack program covering computer science, databases, modern web frameworks and OOP.
 
 ## Projects
-- Pulp Tbilisi (2026) — https://pulptbilisi.netlify.app/
-  Web application for Pulp, a specialty coffee house and wine bar in Vera, Tbilisi.
-  Modern responsive UI, custom menu layouts, smooth navigation.
-  Built with Angular, TypeScript, REST API, GSAP, database design.
 
-## Links
-- Website: https://iliadi.dev
-- GitHub: https://github.com/IliaC0des
-- LinkedIn: https://www.linkedin.com/in/iliailiadi/
-- Instagram: https://www.instagram.com/ilarionaaa7/
-- YouTube: https://www.youtube.com/@ilushayoutubze
-- Facebook: https://www.facebook.com/profile.php?id=61584621844348
+- [Pulp Tbilisi](https://pulptbilisi.netlify.app/): Web application for Pulp, a specialty coffee
+  house and wine bar in Vera, Tbilisi. Responsive UI, custom menu layouts, smooth navigation.
+  Built with Angular, TypeScript, REST API, GSAP and a custom database schema. 2026.
+
+## Profiles
+
+- [GitHub](https://github.com/IliaC0des): Source code and open repositories.
+- [LinkedIn](https://www.linkedin.com/in/iliailiadi/): Professional profile and work history.
+- [Instagram](https://www.instagram.com/ilarionaaa7/): Personal account.
+- [YouTube](https://www.youtube.com/@ilushayoutubze): Video channel.
+- [Facebook](https://www.facebook.com/profile.php?id=61584621844348): Personal account.
 
 ## Contact
-Reach out by email at iliailiadi9@gmail.com or through the contact form at https://iliadi.dev/#contact.
-Typical reply time is under 24 hours.
+
+- [Email — iliailiadi9@gmail.com](mailto:iliailiadi9@gmail.com): Preferred method, reply under 24 hours.
+- [Contact form](https://iliadi.dev/#contact): Enquiry form on the portfolio site.
+
+## Optional
+
+- [CV / resume (PDF)](https://iliadi.dev/assets/CV.pdf): Detailed background, education and skills.
