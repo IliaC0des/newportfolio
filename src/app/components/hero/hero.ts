@@ -30,7 +30,7 @@ export const HERO_PROFILE = {
   accentWord: 'natural',
   tagline:
     'I design and engineer high-fidelity web experiences where motion, typography and real-time graphics behave as one system.',
-stats: [
+  stats: [
     { value: '03+', label: 'Years coding' },
     { value: '1st', label: 'Hackathon winner' },
     { value: '100%', label: 'Real & fluff-free' },
@@ -47,7 +47,7 @@ export const HERO_SOCIALS: HeroSocial[] = [
   {
     label: 'LinkedIn',
     url: 'https://www.linkedin.com/in/iliailiadi/',
-    path: 'M3.5 3.5h17a.5.5 0 0 1 .5.5v17a.5.5 0 0 1-.5.5h-17a.5.5 0 0 1-.5-.5V4a.5.5 0 0 1 .5-.5ZM7 9.5H9.2v8H7v-8Zm1.1-3.6a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6ZM11 9.5h2.1v1.1a2.3 2.3 0 0 1 2.1-1.2c2 0 2.8 1.3 2.8 3.3v4.8h-2.2v-4.3c0-1.1-.4-1.7-1.3-1.7s-1.4.6-1.4 1.7v4.3H11v-8Z',
+    path: 'M3.2 9h3.9v12H3.2V9Zm1.95-6.1a2.25 2.25 0 0 1 0 4.5 2.25 2.25 0 0 1 0-4.5ZM9.9 9h3.74v1.64h.05a4.1 4.1 0 0 1 3.69-2.03c3.95 0 4.68 2.6 4.68 5.98V21h-3.9v-5.63c0-1.34-.02-3.07-1.87-3.07-1.87 0-2.16 1.46-2.16 2.97V21H9.9V9Z',
   },
   {
     label: 'Instagram',
@@ -86,7 +86,7 @@ export const HERO_SOCIALS: HeroSocial[] = [
 export class Hero {
   protected readonly profile = HERO_PROFILE;
 
-  protected readonly marqueeSocials = [...HERO_SOCIALS, ...HERO_SOCIALS, ...HERO_SOCIALS];
+  protected readonly marqueeSocials = [...HERO_SOCIALS, ...HERO_SOCIALS];
   protected readonly socialCount = HERO_SOCIALS.length;
 
   protected readonly lines = HERO_PROFILE.headline.map((line) =>
@@ -123,19 +123,28 @@ export class Hero {
 
       this.motion.context(root, this.destroyRef, ({ gsap, ScrollTrigger }) => {
         const q = gsap.utils.selector(root);
+        const lineInners = q('.line-inner');
 
         section?.removeAttribute('data-anim');
 
         gsap.set(q('.hero__glow'), { xPercent: -50, yPercent: -50, margin: 0 });
+        gsap.set(lineInners, { yPercent: 118, rotate: 3 });
+        gsap.set(
+          [
+            q('.hero__eyebrow'),
+            q('.hero__tagline'),
+            q('.hero__cta > *'),
+            q('.hero__foot > *'),
+          ],
+          { opacity: 0, y: 24 },
+        );
 
-        gsap.set([q('.hero__eyebrow'), q('.hero__cta > *'), q('.hero__foot > *')], {
-          opacity: 0,
-          y: 24,
-        });
         gsap
-          .timeline({ defaults: { ease: 'expo.out' } })
+          .timeline({ defaults: { ease: 'expo.out' }, delay: 0.15 })
           .to(q('.hero__eyebrow'), { opacity: 1, y: 0, duration: 1 })
-          .to(q('.hero__cta > *'), { opacity: 1, y: 0, duration: 1, stagger: 0.09 }, '-=0.55')
+          .to(lineInners, { yPercent: 0, rotate: 0, duration: 1.5, stagger: 0.085 }, '-=0.75')
+          .to(q('.hero__tagline'), { opacity: 1, y: 0, duration: 1 }, '-=0.95')
+          .to(q('.hero__cta > *'), { opacity: 1, y: 0, duration: 1, stagger: 0.09 }, '-=0.8')
           .to(q('.hero__foot > *'), { opacity: 1, y: 0, duration: 1, stagger: 0.07 }, '-=0.9');
 
         if (!this.motion.isTouch()) {
@@ -195,9 +204,6 @@ export class Hero {
   }
 
   private scheduleHeavyFx(): void {
-    // Touch devices get the same gridscan as desktop - the only opt-outs left are the
-    // ones desktop honours too: an explicit reduced-motion preference and genuinely
-    // low-end hardware / metered connections.
     if (this.motion.reducedMotion()) return;
 
     const nav = navigator as Navigator & {
@@ -219,9 +225,19 @@ export class Hero {
       'keydown',
       'scroll',
     ] as const;
-    const idle = window.requestIdleCallback as typeof window.requestIdleCallback | undefined;
+
+    const idle =
+      typeof window.requestIdleCallback === 'function'
+        ? window.requestIdleCallback.bind(window)
+        : undefined;
+    const cancelIdle =
+      typeof window.cancelIdleCallback === 'function'
+        ? window.cancelIdleCallback.bind(window)
+        : undefined;
+
     let handle: number | undefined;
     let fallback: number | undefined;
+    let mounted = false;
 
     const detach = () => {
       for (const event of events) window.removeEventListener(event, onIntent);
@@ -232,6 +248,8 @@ export class Hero {
     };
 
     const onIntent = () => {
+      if (mounted) return;
+      mounted = true;
       detach();
       handle = idle
         ? idle(() => this.heavyFx.set(true), { timeout: 2000 })
@@ -242,15 +260,12 @@ export class Hero {
       window.addEventListener(event, onIntent, { once: true, passive: true });
     }
 
-    // A phone can sit untouched on the hero for a long time - a pointer never moves the
-    // way it does on desktop. Mount it anyway shortly after first paint so the grid is
-    // alive without waiting for a tap.
     fallback = window.setTimeout(onIntent, 1200);
 
     this.destroyRef.onDestroy(() => {
       detach();
       if (handle === undefined) return;
-      if (idle) window.cancelIdleCallback(handle);
+      if (idle && cancelIdle) cancelIdle(handle);
       else window.clearTimeout(handle);
     });
   }

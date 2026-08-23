@@ -25,6 +25,7 @@
     "gsap": "^3.15.0",
     "postprocessing": "^6.39.4",
     "rxjs": "~7.8.0",
+    "simple-icons": "^16.28.0",
     "three": "^0.177.0",
     "tslib": "^2.3.0"
   },
