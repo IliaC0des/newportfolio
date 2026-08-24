@@ -38,7 +38,7 @@ export const CONTACT_COPY = {
   headline: ['Let’s build', 'something', 'that moves.'],
   blurb:
     'Available for select freelance engagements, studio collaborations and long-form product work. Tell me what you are making.',
-  budgets: ['< 10k', '10k — 25k', '25k — 60k', '60k +', 'Not sure yet'],
+  budgets: ['< 1k', '1k — 3k', '5k', '5k +', 'Not sure yet'],
   responseTime: 'Usually replies within 24 hours',
 };
 
